@@ -1,19 +1,19 @@
 #
 # Conditional build:
-%bcond_without	tests	# test target [nothing to do as of 3.1.0]
+%bcond_without	tests	# test target [nothing to do as of 3.7.0]
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
 Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Name:		python-hypothesis
-Version:	3.1.0
-Release:	2
+Version:	3.7.0
+Release:	1
 License:	MPL v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/hypothesis/
-Source0:	https://pypi.python.org/packages/source/h/hypothesis/hypothesis-%{version}.tar.gz
-# Source0-md5:	bddd37c22672dce62e6de315119235d6
+Source0:	https://files.pythonhosted.org/packages/source/h/hypothesis/hypothesis-%{version}.tar.gz
+# Source0-md5:	4afb25fa6785fceac034b63eaa2dfe28
 URL:		https://github.com/DRMacIver/hypothesis
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -27,18 +27,13 @@ BuildRequires:	python-enum34
 %if %{with python3}
 BuildRequires:	python3-modules >= 1:3.4
 BuildRequires:	python3-setuptools
-%if %{with tests}
-%if "%{py3_ver}" < "3.4"
-BuildRequires:	python3-enum34
-%endif
-%endif
 %endif
 Requires:	python-modules >= 1:2.7
 # for individual -extras modules:
 #Suggests:	python-django >= 1.7
-#Suggests:	python-fake-factory >= 0.5.2, python-fake-factory <= 0.5.3
+#Suggests:	python-faker >= 0.7.0, python-faker <= 0.7.1
 #Suggests:	python-numpy >= 1.9.0
-#Suggests:	python-pytest >= 2.7.0
+#Suggests:	python-pytest >= 2.8.0
 #Suggests:	python-pytz
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -62,9 +57,9 @@ Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własności
 Group:		Libraries/Python
 Requires:	python3-modules >= 1:3.4
 #Suggests:	python3-django >= 1.7
-#Suggests:	python3-fake-factory >= 0.5.2, python3-fake-factory <= 0.5.3
+#Suggests:	python3-faker >= 0.7.0, python3-faker <= 0.7.1
 #Suggests:	python3-numpy >= 1.9.0
-#Suggests:	python3-pytest >= 2.7.0
+#Suggests:	python3-pytest >= 2.8.0
 #Suggests:	python3-pytz
 
 %description -n python3-hypothesis
