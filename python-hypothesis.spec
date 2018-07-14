@@ -8,7 +8,7 @@ Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Name:		python-hypothesis
 Version:	3.66.1
-Release:	1
+Release:	2
 License:	MPL v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/hypothesis/
@@ -108,9 +108,12 @@ rm -rf $RPM_BUILD_ROOT
 %py3_install
 
 %if "%{py3_ver}" >= "3.4"
-# avoid python3egg(enum34) dependencies (rpm pythonegg dependency generator
-# resolves python version conditions by interpreter used to run the generator)
-%{__sed} -i -e '/^\[:python_version == "2\.7"\]/,/^$/d' $RPM_BUILD_ROOT%{py3_sitescriptdir}/hypothesis-%{version}-py*.egg-info/requires.txt
+# Avoid python3egg(enum34) dependencies (rpm pythonegg dependency generator
+# resolves python version conditions by interpreter used to run the generator).
+# Note: depending on setuptools version requirement could be written in two forms, see below.
+%{__sed} -e '/^\[:python_version == "2\.7"\]/,/^$/d' \
+	-e '/^enum34; python_version=="2\.7"/d' \
+	-i $RPM_BUILD_ROOT%{py3_sitescriptdir}/hypothesis-%{version}-py*.egg-info/requires.txt
 %endif
 %endif
 
