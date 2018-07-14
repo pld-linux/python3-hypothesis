@@ -7,13 +7,13 @@
 Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Name:		python-hypothesis
-Version:	3.7.0
-Release:	2
+Version:	3.66.1
+Release:	1
 License:	MPL v2.0
 Group:		Libraries/Python
-#Source0Download: https://pypi.python.org/simple/hypothesis/
+#Source0Download: https://pypi.org/simple/hypothesis/
 Source0:	https://files.pythonhosted.org/packages/source/h/hypothesis/hypothesis-%{version}.tar.gz
-# Source0-md5:	4afb25fa6785fceac034b63eaa2dfe28
+# Source0-md5:	bde49b6e8a63335e44dbb1f8e3f47cbb
 URL:		https://github.com/DRMacIver/hypothesis
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -21,17 +21,24 @@ BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools
 %if %{with tests}
+BuildRequires:	python-attrs >= 16.0.0
+BuildRequires:	python-coverage >= 4.0
 BuildRequires:	python-enum34
 %endif
 %endif
 %if %{with python3}
 BuildRequires:	python3-modules >= 1:3.4
 BuildRequires:	python3-setuptools
+%if %{with tests}
+BuildRequires:	python3-attrs >= 16.0.0
+BuildRequires:	python3-coverage >= 4.0
+%endif
 %endif
 Requires:	python-modules >= 1:2.7
 # for individual -extras modules:
-#Suggests:	python-django >= 1.7
-#Suggests:	python-faker >= 0.7.0, python-faker <= 0.7.1
+#Suggests:	python-dateutil
+#Suggests:	python-django >= 1.11
+#Suggests:	python-faker >= 0.7
 #Suggests:	python-numpy >= 1.9.0
 #Suggests:	python-pytest >= 2.8.0
 #Suggests:	python-pytz
@@ -56,8 +63,9 @@ Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Group:		Libraries/Python
 Requires:	python3-modules >= 1:3.4
-#Suggests:	python3-django >= 1.7
-#Suggests:	python3-faker >= 0.7.0, python3-faker <= 0.7.1
+#Suggests:	python3-dateutil
+#Suggests:	python3-django >= 1.11
+#Suggests:	python3-faker >= 0.7
 #Suggests:	python3-numpy >= 1.9.0
 #Suggests:	python3-pytest >= 2.8.0
 #Suggests:	python3-pytz
@@ -102,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %if "%{py3_ver}" >= "3.4"
 # avoid python3egg(enum34) dependencies (rpm pythonegg dependency generator
 # resolves python version conditions by interpreter used to run the generator)
-%{__sed} -i -e "/^\[:python_version == '\(2\.[67]\|3\.3\)'\]/,/^$/d" $RPM_BUILD_ROOT%{py3_sitescriptdir}/hypothesis-%{version}-py*.egg-info/requires.txt
+%{__sed} -i -e '/^\[:python_version == "2\.7"\]/,/^$/d' $RPM_BUILD_ROOT%{py3_sitescriptdir}/hypothesis-%{version}-py*.egg-info/requires.txt
 %endif
 %endif
 
