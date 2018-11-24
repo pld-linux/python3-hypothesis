@@ -7,19 +7,19 @@
 Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Name:		python-hypothesis
-Version:	3.66.1
-Release:	2
+Version:	3.82.1
+Release:	1
 License:	MPL v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/hypothesis/
 Source0:	https://files.pythonhosted.org/packages/source/h/hypothesis/hypothesis-%{version}.tar.gz
-# Source0-md5:	bde49b6e8a63335e44dbb1f8e3f47cbb
+# Source0-md5:	29e0b3793b02df6606afb4cd37e25fa5
 URL:		https://github.com/DRMacIver/hypothesis
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.7
-BuildRequires:	python-setuptools
+BuildRequires:	python-setuptools >= 36.2
 %if %{with tests}
 BuildRequires:	python-attrs >= 16.0.0
 BuildRequires:	python-coverage >= 4.0
@@ -28,7 +28,7 @@ BuildRequires:	python-enum34
 %endif
 %if %{with python3}
 BuildRequires:	python3-modules >= 1:3.4
-BuildRequires:	python3-setuptools
+BuildRequires:	python3-setuptools >= 36.2
 %if %{with tests}
 BuildRequires:	python3-attrs >= 16.0.0
 BuildRequires:	python3-coverage >= 4.0
@@ -36,12 +36,13 @@ BuildRequires:	python3-coverage >= 4.0
 %endif
 Requires:	python-modules >= 1:2.7
 # for individual -extras modules:
-#Suggests:	python-dateutil
+#Suggests:	python-dateutil >= 1.4
 #Suggests:	python-django >= 1.11
+#Suggests:	python-dpcontracts >= 0.4
 #Suggests:	python-faker >= 0.7
 #Suggests:	python-numpy >= 1.9.0
-#Suggests:	python-pytest >= 2.8.0
-#Suggests:	python-pytz
+#Suggests:	python-pytest >= 3.0
+#Suggests:	python-pytz >= 2014.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -63,12 +64,13 @@ Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Group:		Libraries/Python
 Requires:	python3-modules >= 1:3.4
-#Suggests:	python3-dateutil
+#Suggests:	python3-dateutil >= 1.4
 #Suggests:	python3-django >= 1.11
+#Suggests:	python3-dpcontracts >= 0.4
 #Suggests:	python3-faker >= 0.7
 #Suggests:	python3-numpy >= 1.9.0
-#Suggests:	python3-pytest >= 2.8.0
-#Suggests:	python3-pytz
+#Suggests:	python3-pytest >= 3.0
+#Suggests:	python3-pytz >= 2014.1
 
 %description -n python3-hypothesis
 Hypothesis is a library for testing your Python code against a much
