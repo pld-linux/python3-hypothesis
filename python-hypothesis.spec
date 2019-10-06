@@ -7,13 +7,13 @@
 Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Name:		python-hypothesis
-Version:	3.88.3
+Version:	4.38.3
 Release:	1
 License:	MPL v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/hypothesis/
 Source0:	https://files.pythonhosted.org/packages/source/h/hypothesis/hypothesis-%{version}.tar.gz
-# Source0-md5:	325cb5dee4332ecdfa526123e2735009
+# Source0-md5:	e44da1fe1eb055bbf67f555aeda6145f
 URL:		https://github.com/DRMacIver/hypothesis
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -21,16 +21,16 @@ BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools >= 36.2
 %if %{with tests}
-BuildRequires:	python-attrs >= 16.0.0
+BuildRequires:	python-attrs >= 19.2.0
 BuildRequires:	python-coverage >= 4.0
 BuildRequires:	python-enum34
 %endif
 %endif
 %if %{with python3}
-BuildRequires:	python3-modules >= 1:3.4
+BuildRequires:	python3-modules >= 1:3.5
 BuildRequires:	python3-setuptools >= 36.2
 %if %{with tests}
-BuildRequires:	python3-attrs >= 16.0.0
+BuildRequires:	python3-attrs >= 19.2.0
 BuildRequires:	python3-coverage >= 4.0
 %endif
 %endif
@@ -39,7 +39,7 @@ Requires:	python-modules >= 1:2.7
 #Suggests:	python-dateutil >= 1.4
 #Suggests:	python-django >= 1.11
 #Suggests:	python-dpcontracts >= 0.4
-#Suggests:	python-faker >= 0.7
+#Suggests:	python-lark-parser >= 0.6.5
 #Suggests:	python-numpy >= 1.9.0
 #Suggests:	python-pandas >= 0.19
 #Suggests:	python-pytest >= 3.0
@@ -64,11 +64,11 @@ istniejącym przepływem testów jednostkowych w Pythonie.
 Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Group:		Libraries/Python
-Requires:	python3-modules >= 1:3.4
+Requires:	python3-modules >= 1:3.5
 #Suggests:	python3-dateutil >= 1.4
 #Suggests:	python3-django >= 1.11
 #Suggests:	python3-dpcontracts >= 0.4
-#Suggests:	python3-faker >= 0.7
+#Suggests:	python3-lark-parser >= 0.6.5
 #Suggests:	python3-numpy >= 1.9.0
 #Suggests:	python3-pandas >= 0.19
 #Suggests:	python3-pytest >= 3.0
