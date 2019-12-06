@@ -7,13 +7,13 @@
 Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Name:		python-hypothesis
-Version:	4.38.3
-Release:	2
+Version:	4.50.8
+Release:	1
 License:	MPL v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/hypothesis/
 Source0:	https://files.pythonhosted.org/packages/source/h/hypothesis/hypothesis-%{version}.tar.gz
-# Source0-md5:	e44da1fe1eb055bbf67f555aeda6145f
+# Source0-md5:	ee004023e24111336894b4c557f11db7
 URL:		https://github.com/DRMacIver/hypothesis
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
