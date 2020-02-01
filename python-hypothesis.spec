@@ -1,37 +1,41 @@
 #
 # Conditional build:
-%bcond_without	tests	# test target [nothing to do as of 3.7.0]
+%bcond_with	tests	# nothing currently
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
 Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Name:		python-hypothesis
-Version:	4.50.8
+Version:	4.57.1
 Release:	1
 License:	MPL v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/hypothesis/
 Source0:	https://files.pythonhosted.org/packages/source/h/hypothesis/hypothesis-%{version}.tar.gz
-# Source0-md5:	ee004023e24111336894b4c557f11db7
+# Source0-md5:	019caf033d5d5e349141c1cb13860148
 URL:		https://github.com/DRMacIver/hypothesis
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.7
-BuildRequires:	python-setuptools >= 36.2
+BuildRequires:	python-setuptools >= 1:36.2
 %if %{with tests}
 BuildRequires:	python-attrs >= 19.2.0
 BuildRequires:	python-coverage >= 4.0
 BuildRequires:	python-enum34
+BuildRequires:	python-sortedcontainers >= 2.1.0
+BuildRequires:	python-sortedcontainers < 3.0.0
 %endif
 %endif
 %if %{with python3}
 BuildRequires:	python3-modules >= 1:3.5
-BuildRequires:	python3-setuptools >= 36.2
+BuildRequires:	python3-setuptools >= 1:36.2
 %if %{with tests}
 BuildRequires:	python3-attrs >= 19.2.0
 BuildRequires:	python3-coverage >= 4.0
+BuildRequires:	python3-sortedcontainers >= 2.1.0
+BuildRequires:	python3-sortedcontainers < 3.0.0
 %endif
 %endif
 Requires:	python-modules >= 1:2.7
@@ -42,7 +46,7 @@ Requires:	python-modules >= 1:2.7
 #Suggests:	python-lark-parser >= 0.6.5
 #Suggests:	python-numpy >= 1.9.0
 #Suggests:	python-pandas >= 0.19
-#Suggests:	python-pytest >= 3.0
+#Suggests:	python-pytest >= 4.3
 #Suggests:	python-pytz >= 2014.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -71,7 +75,7 @@ Requires:	python3-modules >= 1:3.5
 #Suggests:	python3-lark-parser >= 0.6.5
 #Suggests:	python3-numpy >= 1.9.0
 #Suggests:	python3-pandas >= 0.19
-#Suggests:	python3-pytest >= 3.0
+#Suggests:	python3-pytest >= 4.3
 #Suggests:	python3-pytz >= 2014.1
 
 %description -n python3-hypothesis
@@ -92,11 +96,11 @@ istniejącym przepływem testów jednostkowych w Pythonie.
 
 %build
 %if %{with python2}
-%py_build %{?with_tests:test}
+%py_build
 %endif
 
 %if %{with python3}
-%py3_build %{?with_tests:test}
+%py3_build
 %endif
 
 %install
@@ -110,15 +114,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{with python3}
 %py3_install
-
-%if "%{py3_ver}" >= "3.4"
-# Avoid python3egg(enum34) dependencies (rpm pythonegg dependency generator
-# resolves python version conditions by interpreter used to run the generator).
-# Note: depending on setuptools version requirement could be written in two forms, see below.
-%{__sed} -e '/^\[:python_version == "2\.7"\]/,/^$/d' \
-	-e '/^enum34; python_version=="2\.7"/d' \
-	-i $RPM_BUILD_ROOT%{py3_sitescriptdir}/hypothesis-%{version}-py*.egg-info/requires.txt
-%endif
 %endif
 
 %clean
