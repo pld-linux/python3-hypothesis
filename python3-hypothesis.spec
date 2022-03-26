@@ -5,33 +5,41 @@
 Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Name:		python3-hypothesis
-Version:	5.49.0
-Release:	4
+Version:	6.39.4
+Release:	1
 License:	MPL v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/hypothesis/
 Source0:	https://files.pythonhosted.org/packages/source/h/hypothesis/hypothesis-%{version}.tar.gz
-# Source0-md5:	350fda2e928cc59a38160d9c72f3631c
+# Source0-md5:	0333dbdb46a8c7065b8d5621e5955bd9
 URL:		https://github.com/DRMacIver/hypothesis
-BuildRequires:	python3-modules >= 1:3.6
+BuildRequires:	python3-modules >= 1:3.7
 BuildRequires:	python3-setuptools >= 1:36.2
 %if %{with tests}
 BuildRequires:	python3-attrs >= 19.2.0
+%if "%{py3_ver}" == "3.7"
+BuildRequires:	python3-importlib_metadata >= 3.6
+%endif
 BuildRequires:	python3-sortedcontainers >= 2.1.0
 BuildRequires:	python3-sortedcontainers < 3.0.0
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
-Requires:	python3-modules >= 1:3.6
+Requires:	python3-modules >= 1:3.7
 # for individual -extras modules:
+#Suggests:	python3-black >= 19.10b0
+#Suggests:	python3-click >= 7.0
 #Suggests:	python3-dateutil >= 1.4
 #Suggests:	python3-django >= 2.2
 #Suggests:	python3-dpcontracts >= 0.4
 #Suggests:	python3-lark-parser >= 0.6.5
+#Suggests:	python3-libcst >= 0.3.16
 #Suggests:	python3-numpy >= 1.9.0
 #Suggests:	python3-pandas >= 0.25
-#Suggests:	python3-pytest >= 4.3
+#Suggests:	python3-pytest >= 4.6
 #Suggests:	python3-pytz >= 2014.1
+#Suggests:	python3-redis >= 3.0.0
+#Suggests:	python3-rich >= 9.0.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -67,4 +75,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.rst
 %attr(755,root,root) %{_bindir}/hypothesis
 %{py3_sitescriptdir}/hypothesis
+%{py3_sitescriptdir}/_hypothesis_pytestplugin.py
+%{py3_sitescriptdir}/__pycache__/_hypothesis_pytestplugin.cpython-*.py[co]
 %{py3_sitescriptdir}/hypothesis-%{version}-py*.egg-info
