@@ -7,7 +7,7 @@ Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własności
 Name:		python3-hypothesis
 # note: 6.47.2+ needs exceptiongroup (or python 3.11+)
 Version:	6.47.1
-Release:	2
+Release:	3
 License:	MPL v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/hypothesis/
