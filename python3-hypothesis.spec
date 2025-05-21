@@ -5,17 +5,19 @@
 Summary:	Hypothesis - library for property based testing
 Summary(pl.UTF-8):	Hypothesis - biblioteka do testowania opartego na własnościach
 Name:		python3-hypothesis
-# note: 6.47.2+ needs exceptiongroup (or python 3.11+)
-Version:	6.47.1
-Release:	3
+Version:	6.131.20
+Release:	1
 License:	MPL v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/hypothesis/
 Source0:	https://files.pythonhosted.org/packages/source/h/hypothesis/hypothesis-%{version}.tar.gz
-# Source0-md5:	c3c969e0e05a56e30f65bf91f711903d
+# Source0-md5:	ef59cefffce74dc00c7d878bca84349f
 URL:		https://github.com/DRMacIver/hypothesis
-BuildRequires:	python3-modules >= 1:3.7
-BuildRequires:	python3-setuptools >= 1:36.2
+BuildRequires:	python3-build
+BuildRequires:	python3-installer
+BuildRequires:	python3-modules >= 1:3.9
+BuildRequires:	python3-setuptools >= 1:78.1.0
+BuildRequires:	python3-wheel
 %if %{with tests}
 BuildRequires:	python3-attrs >= 19.2.0
 %if "%{py3_ver}" == "3.7"
@@ -25,8 +27,8 @@ BuildRequires:	python3-sortedcontainers >= 2.1.0
 BuildRequires:	python3-sortedcontainers < 3.0.0
 %endif
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.714
-Requires:	python3-modules >= 1:3.7
+BuildRequires:	rpmbuild(macros) >= 2.044
+Requires:	python3-modules >= 1:3.9
 # for individual -extras modules:
 #Suggests:	python3-black >= 19.10b0
 #Suggests:	python3-click >= 7.0
@@ -61,21 +63,25 @@ istniejącym przepływem testów jednostkowych w Pythonie.
 %setup -q -n hypothesis-%{version}
 
 %build
-%py3_build
+%py3_build_pyproject
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%py3_install
+%py3_install_pyproject
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.rst
+%doc README.md
 %attr(755,root,root) %{_bindir}/hypothesis
 %{py3_sitescriptdir}/hypothesis
+%{py3_sitescriptdir}/_hypothesis_ftz_detector.py
+%{py3_sitescriptdir}/_hypothesis_globals.py
 %{py3_sitescriptdir}/_hypothesis_pytestplugin.py
+%{py3_sitescriptdir}/__pycache__/_hypothesis_ftz_detector.cpython-*.py[co]
+%{py3_sitescriptdir}/__pycache__/_hypothesis_globals.cpython-*.py[co]
 %{py3_sitescriptdir}/__pycache__/_hypothesis_pytestplugin.cpython-*.py[co]
-%{py3_sitescriptdir}/hypothesis-%{version}-py*.egg-info
+%{py3_sitescriptdir}/hypothesis-%{version}.dist-info
